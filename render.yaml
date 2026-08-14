@@ -9,7 +9,7 @@ services:
   - type: web
     name: buddy
     runtime: docker
-    repo: https://github.com/YOUR_USERNAME/buddy   # update with your repo
+  repo: https://github.com/shalemraj00007-ai/Buddy  # update with your repo
     plan: free
     region: singapore                                  # pick one near you
     dockerfilePath: ./Dockerfile
