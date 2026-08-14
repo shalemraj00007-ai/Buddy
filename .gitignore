@@ -1,0 +1,16 @@
+# dependencies
+node_modules/
+
+# builds
+server/dist/
+web/dist/
+
+# env & secrets
+server/.env
+
+# data (SQLite + uploaded files)
+server/data/
+
+# logs / misc
+*.log
+.DS_Store

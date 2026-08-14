@@ -1,0 +1,16 @@
+# Railway config for Buddy.
+# Railway auto-detects the Dockerfile and runs it. Add a Volume mounted at
+# /data in the Railway dashboard so your SQLite data persists.
+
+[build]
+  builder = "DOCKERFILE"
+  dockerfilePath = "Dockerfile"
+
+[deploy]
+  startCommand = "node node_modules/tsx/dist/cli.mjs src/index.ts"
+  healthcheck_path = "/api/health"
+  healthcheck_timeout = 300
+  restartPolicyType = "ON_FAILURE"
+
+[deploy.volumes]
+  # Mount in the Railway dashboard: mount path must be /data

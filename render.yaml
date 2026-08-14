@@ -1,0 +1,35 @@
+# Render Blueprint — one-click cloud deploy for Buddy.
+# Push this repo to GitHub, connect it on Render, and it provisions:
+#   - a Web Service from the Dockerfile
+#   - a persistent Disk mounted at /data (keeps your SQLite data)
+#   - the environment variables below
+#
+# Your data survives restarts because it lives on the Disk, not the container.
+services:
+  - type: web
+    name: buddy
+    runtime: docker
+    repo: https://github.com/YOUR_USERNAME/buddy   # update with your repo
+    plan: free
+    region: singapore                                  # pick one near you
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: JWT_SECRET
+        sync: false    # set it in the Render dashboard (long random string)
+      - key: AI_PROVIDER
+        value: none    # or: ollama (needs a hosted model) / openai
+      - key: OLLAMA_BASE_URL
+        value: http://localhost:11434
+      - key: OLLAMA_MODEL
+        value: llama3.2
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-4o-mini
+      - key: DATA_DIR
+        value: /data
+    disk:
+      name: buddy-data
+      mountPath: /data
+      sizeGB: 1
